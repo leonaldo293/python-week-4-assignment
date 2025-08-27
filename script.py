@@ -1,35 +1,35 @@
-def read_and_modify_file():
+def ler_e_escrever():
+    """Parte 1: Ler input.txt, transformar em maiúsculas e salvar em output.txt"""
+    with open("input.txt", "r", encoding="utf-8") as infile:
+        conteudo = infile.read()
+
+    modificado = conteudo.upper()
+
+    with open("output.txt", "w", encoding="utf-8") as outfile:
+        outfile.write(modificado)
+
+    print("✅ Arquivo processado! Conteúdo modificado gravado em output.txt")
+
+
+def leitura_segura():
+    """Parte 2: Pedir nome do arquivo e tratar erros"""
     try:
-        # Nome fixo do arquivo de entrada
-        filename = "input.txt"
-
-        # Abrir e ler o arquivo
-        with open(filename, "r", encoding="utf-8") as infile:
-            content = infile.read()
-
-        # Contar palavras
-        word_count = len(content.split())
-
-        # Converter texto para maiúsculas
-        modified_content = content.upper()
-
-        # Nome do arquivo de saída
-        new_filename = "output.txt"
-        with open(new_filename, "w", encoding="utf-8") as outfile:
-            outfile.write("=== PROCESSED TEXT ===\n")
-            outfile.write(modified_content + "\n\n")
-            outfile.write(f"Word count: {word_count}\n")
-
-        print(f"✅ File processed successfully! Output saved as '{new_filename}'.")
+        arquivo = input("Digite o nome do arquivo para leitura: ")
+        with open(arquivo, "r", encoding="utf-8") as f:
+            conteudo = f.read()
+        print("📄 Conteúdo do arquivo:\n", conteudo)
 
     except FileNotFoundError:
-        print("❌ Error: input.txt not found.")
+        print("❌ Erro: Arquivo não encontrado.")
     except PermissionError:
-        print("❌ Error: You don’t have permission to read this file.")
+        print("❌ Erro: Permissão negada.")
     except Exception as e:
-        print(f"❌ Unexpected error: {e}")
+        print(f"❌ Erro inesperado: {e}")
 
 
-# Executar função principal
 if __name__ == "__main__":
-    read_and_modify_file()
+    print("=== Parte 1: Ler e escrever ===")
+    ler_e_escrever()
+
+    print("\n=== Parte 2: Leitura segura com tratamento de erros ===")
+    leitura_segura()
